@@ -1,0 +1,8 @@
+//just core codes
+long long T[10][100050]={0}, tmp;  //k元至少建立k个BIT
+for(i=n;i>=1;--i){                 //n为数的总个数
+    for(j=k-2;j>0;--j) Add(aa[i],Query(aa[i]-1,T[j]),T[j+1]);
+    Add(aa[i],1,T[1]);
+    tmp = Query(aa[i]-1,T[k-1]);
+    ans += tmp;
+}
