@@ -1,0 +1,15 @@
+//BIT的下标表示实际数据的值，而BIT存的值则代表该数据的个数，做其余操作时应维护这个BIT
+//这个算法算的是第k小的数，要算第k大的话把参数设为num-k+1，num为数据总个数
+//另外，这个算法算上了相同的数，比如1 1 2，查第二小的数就是2而不是1
+
+const int MAX=530000;
+
+int find(int k, int a[]){
+    int cnt=0,ans=0;
+    for(int i=19;i>=0;--i){		//i的初始值应为满足 2^i<MAX 的最大值
+        ans += (1<<i);
+        if(ans>=MAX||cnt+a[ans]>=k) ans-=(1<<i);
+        else cnt += a[ans];
+    }
+    return ans + 1;
+}
