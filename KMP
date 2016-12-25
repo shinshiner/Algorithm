@@ -1,0 +1,25 @@
+//返回sub首字符在all的位置(从0开始算)
+int KMP(string &all, string &sub){
+    int *p = new int[sub.size()];   //存放失效函数
+    int i, j;
+
+    //生成失效函数
+    p[0] = -1;
+    for(i=1;i<sub.size();++i){
+        j = i - 1;
+        while(j>=0&&sub[p[j]+1]!=sub[i]) j = p[j];
+        if(j<0) p[i] = -1;
+        else p[i] = p[j] + 1;
+    }
+
+    //查找
+    i = j = 0;
+    while(i<all.size()&&j<sub.size()){
+        if(sub[j]==all[i]) {++i; ++j;}
+        else if(j==0) ++i;
+        else j = p[j-1] + 1;
+    }
+    delete []p;
+    if(j==sub.size()) return i - j;
+    else return -1;
+}
