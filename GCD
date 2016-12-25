@@ -1,0 +1,11 @@
+//求最大公因数
+int GCD(int x, int y){
+    int r;
+    while(true){
+        r = x % y;
+        if(r==0) break;
+        x = y;
+        y = r;
+    }
+    return y;
+}
